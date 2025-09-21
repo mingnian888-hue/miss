@@ -1,0 +1,34 @@
+def maze_game():
+    print("迷宫：W上 A左 S下 D右，到达出口(E)赢！")
+    maze = [
+        "#####E#",
+        "#     #",
+        "# ### #",
+        "#     #",
+        "#######",
+    ]
+    player_pos = [1,1]
+    while True:
+        for y,row in enumerate(maze):
+            line = ""
+            for x,ch in enumerate(row):
+                if [y,x] == player_pos:
+                    line += "P"
+                else:
+                    line += ch
+            print(line)
+        move = input("移动: ").lower()
+        dy, dx = 0,0
+        if move=="w": dy=-1
+        elif move=="s": dy=1
+        elif move=="a": dx=-1
+        elif move=="d": dx=1
+        ny, nx = player_pos[0]+dy, player_pos[1]+dx
+        if maze[ny][nx] == "#":
+            print("撞墙了！")
+        elif maze[ny][nx] == "E":
+            print("你找到出口，胜利！")
+            break
+        else:
+            player_pos = [ny,nx]
+maze_game()
